@@ -4,6 +4,7 @@ metadata:
   name: {{ include "app-demo.fullname" . }}
   labels:
     {{- include "app-demo.labels" . | nindent 4 }}
+  namespace: argocd
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -70,9 +71,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
+        magnum.openstack.org/nodegroup: qas
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}

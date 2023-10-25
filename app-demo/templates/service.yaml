@@ -4,6 +4,7 @@ metadata:
   name: {{ include "app-demo.fullname" . }}
   labels:
     {{- include "app-demo.labels" . | nindent 4 }}
+  namespace: argocd
 spec:
   type: {{ .Values.service.type }}
   ports:
